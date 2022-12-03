@@ -27,7 +27,7 @@ public class LoginStepDefinitions {
         password.sendKeys("1234");
     }
 
-    @When("I click sign in button")
+    @When("user clicks sign in button")
     public void allStepDefinitionsAreImplemented() {
         WebElement loginButton = driver.findElement(By.id("genericLogin-button"));
         loginButton.click();
