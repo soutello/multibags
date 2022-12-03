@@ -11,15 +11,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class PasswordChangeStepDefinitions {
 
     private WebDriver driver;
 
     @Given("user fill form with new password")
     public void fillChangePasswordForm() {
-        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
         driver.get("http://multibags.1dt.com.br/shop/customer/password.html");
 
         WebElement currentPassword = driver.findElement(By.id("currentPassword"));
@@ -45,6 +42,12 @@ public class PasswordChangeStepDefinitions {
 
         WebElement loginButton = driver.findElement(By.id("genericLogin-button"));
         loginButton.click();
+
+        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.getCurrentUrl().startsWith("http://multibags.1dt.com.br/shop/customer/dashboard.html");
+            }
+        });
     }
 
     @When("user clicks change password")
