@@ -62,11 +62,11 @@ public class LoginStepDefinitions {
         loginButton.click();
     }
 
-    @Then("login sucess")
+    @Then("login success")
     public void validtheScenarioPasses() {
         new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
-                return d.findElement(By.id("login")).isDisplayed();
+                return d.getCurrentUrl().startsWith("http://multibags.1dt.com.br/shop/customer/dashboard.html");
             }
         });
         driver.quit();

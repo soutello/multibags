@@ -8,4 +8,4 @@ Feature: Login
     Scenario: Login sucess
     Given user input registered email in login page
     When user clicks sign in button ok
-    Then login sucess  
+    Then login success
