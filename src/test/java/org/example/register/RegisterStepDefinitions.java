@@ -29,7 +29,7 @@ public class RegisterStepDefinitions {
         WebElement password = driver.findElement(By.id("password"));
         WebElement repeatPassword = driver.findElement(By.id("passwordAgain"));
 
-        String randomString = RandomStringUtils.randomAlphabetic(4);
+        String randomString = RandomStringUtils.randomAlphabetic(8);
 
         firstName.sendKeys("Seu Zé ");
         lastName.sendKeys("Do Teste");

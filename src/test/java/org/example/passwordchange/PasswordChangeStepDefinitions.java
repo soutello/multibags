@@ -12,6 +12,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Objects;
+
 public class PasswordChangeStepDefinitions {
 
     private WebDriver driver;
@@ -89,5 +91,26 @@ public class PasswordChangeStepDefinitions {
                 return d.getCurrentUrl().startsWith("http://multibags.1dt.com.br/shop/customer/dashboard.html");
             }
         });
+    }
+
+    @When("user fill password change form with new password different than repeat password")
+    public void fillChangePasswordFormMismatch() {
+        WebElement currentPassword = driver.findElement(By.id("currentPassword"));
+        WebElement newPassword = driver.findElement(By.id("password"));
+        WebElement repeatPassword = driver.findElement(By.id("checkPassword"));
+
+        currentPassword.sendKeys("123456");
+        newPassword.sendKeys("098765");
+        repeatPassword.sendKeys("bfdihfiudhf");
+    }
+
+    @Then("both password must match message must be displayed")
+    public void passwordMismatchMessage() {
+        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return Objects.equals(d.findElement(By.id("formError")).getText(), "Both password must match");
+            }
+        });
+        driver.quit();
     }
 }
