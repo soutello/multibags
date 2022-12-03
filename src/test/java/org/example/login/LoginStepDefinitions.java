@@ -43,4 +43,32 @@ public class LoginStepDefinitions {
         driver.quit();
     }
 
+    @Given("user input registered email in login page")
+    public void validanExampleScenario() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get("http://multibags.1dt.com.br/shop/customer/customLogon.html");
+
+        WebElement email = driver.findElement(By.id("signin_userName"));
+        WebElement password = driver.findElement(By.id("signin_password"));
+
+        email.sendKeys("bancoguedes@gmail.com");
+        password.sendKeys("Abd12345");
+    }
+
+    @When("user clicks sign in button ok")
+    public void validallStepDefinitionsAreImplemented() {
+        WebElement loginButton = driver.findElement(By.id("genericLogin-button"));
+        loginButton.click();
+    }
+
+    @Then("login sucess")
+    public void validtheScenarioPasses() {
+        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.findElement(By.id("login")).isDisplayed();
+            }
+        });
+        driver.quit();
+    }
 }
